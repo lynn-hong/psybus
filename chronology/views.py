@@ -47,12 +47,12 @@ class Index(TemplateView):
         context['supporters'] = Supporter.objects.all()
         return context
 
-class Supporters(TemplateView):
-    template_name = 'chronology/supporters.html'
+class Links(TemplateView):
+    template_name = 'chronology/links.html'
     def get_context_data(self, **kwargs):
-        context = super(Supporters, self).get_context_data(**kwargs)
-        # supporters
-        context['supporters'] = Supporter.objects.all()
+        context = super(Links, self).get_context_data(**kwargs)
+        # links
+        context['links'] = Supporter.objects.all()
         return context
 
 def get_study_info(pk):

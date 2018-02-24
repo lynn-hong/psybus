@@ -44,6 +44,7 @@ Group detail Section Start
 									<th>시간(장소)</th>
 									<th>교재 및 커리큘럼</th>
 									<th>선수과목</th>
+									<th>난이도</th>
 									<th>상태</th>
 								</tr>
 							</thead>
@@ -60,6 +61,7 @@ Group detail Section Start
                                         <br>({{ study.p_id__location }})</td>
 									<td data-th="교재 및 커리큘럼">{{ study.p_id__textbook|linebreaks }}</td>
 									<td data-th="선수과목">{{ study.p_id__prerequisite|linebreaks }}</td>
+									<td data-th="난이도">{{ study.level }}</td>
 									<td data-th="상태">{{ study.status }}</td>
 								</tr>
                             {% endfor %}

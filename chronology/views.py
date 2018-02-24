@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.db import models
 from django.db.models import Count, Max, Sum
-from .models import Community, Manager, Operation, Part, Study, Supporter, COMMUNITY_TYPE, DAYS_OF_WEEK, DATE_INTERVAL
+from .models import Community, Manager, Operation, Part, Study, Supporter, COMMUNITY_TYPE, DAYS_OF_WEEK, DATE_INTERVAL, LEVEL
 from django.template.defaulttags import register
 from django.shortcuts import render, get_object_or_404
 from datetime import date
@@ -83,6 +83,7 @@ def get_study_info(pk):
         # day and interval
         entry['day'] = DAYS_OF_WEEK[entry['p_id__day']][1]
         entry['interval'] = DATE_INTERVAL[entry['p_id__interval']][1]
+        entry['level'] = LEVEL[entry['p_id__part_level']-1][1]
 
     return operations
 

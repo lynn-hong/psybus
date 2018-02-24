@@ -1,0 +1,434 @@
+{% extends "chronology/base.html" %}
+
+{% load staticfiles %}
+
+{% block contents_body %}
+<!--
+==================================================
+Slider Section Start
+================================================== -->
+<section id="hero-area" >
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div class="block wow fadeInUp" data-wow-delay=".3s">
+                <!-- Slider -->
+                <section class="cd-intro">
+                    <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s" >
+                    <span>이렇게 많은 그룹이 함께합니다</span><br>
+                    <span class="cd-words-wrapper">
+                        <b class="is-visible">싸이그래머</b>
+                        {% for group_name in group_names %}
+                        <b>{{ group_name.c_name_kor }}</b>
+                        {% endfor %}
+                    </span>
+                    </h1>
+                    </section> <!-- cd-intro -->
+                    <!-- /.slider -->
+                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s" >
+                        <span style="font-weight: bold;">
+                            "나는 다양한 미래들에게(모든 미래들이 아닌) 끝없이 두 갈래로 갈라지는 길들이 있는 정원을 남긴다"
+                        </span><br>
+                        -호르헤 루이스 보르헤스, 『픽션들 - 끝없이 두 갈래로 갈라지는 길들이 있는 정원』
+                    </h2>
+                    <a class="btn-lines dark light wow fadeInUp animated smooth-scroll btn btn-default btn-green"
+                       data-wow-delay=".9s" href="#chronology" data-section="#chronology">스터디 그룹 연대표 보기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/#main-slider-->
+
+
+<!--
+==================================================
+Chronology Section Start
+================================================== -->
+<section id="chronology">
+    <div class="container-fluid">
+        <div class="row example-centered">
+            <div class="col-md-12 example-title">
+                <h2 style="margin-top:80px;">스터디 그룹 연대표</h2>
+                <p>수많은 이들이 함께 만들어 온 발자취입니다</p>
+            </div>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                <ul class="timeline timeline-centered">
+                    {% for year, group in groups %}
+                        {% for g in group %}
+                        <li class="timeline-item">
+                            <div class="timeline-info">
+                                <span>{{ g.range_ko }}</span>
+                            </div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <a class="timeline-title-a" href="{% url 'group_detail' pk=g.id %}">
+                                    <h3 class="timeline-title">{{ g.c_name_kor }}({{ g.c_name_eng }})</h3>
+                                </a>
+                                <p>{{ g.desc_kor }}</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                        <!-- year, month bar -->
+                        <li class="timeline-item period">
+                            <div class="timeline-info"></div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h2 class="timeline-title">{{ year }}</h2>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section><!--/#chronolgy timeline-->
+
+
+<!--
+==================================================
+About Section Start
+================================================== -->
+<section id="about" style="padding-top:70px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="block wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="500ms">
+                    <h2>
+                    ABOUT Psybus
+                    </h2>
+                    <p>
+                        <span style="font-weight: bold;">싸이버스는?: 스터디 그룹 연합체</span><br/>
+                        Psy + Bus<br/>
+                        Cyber + Earth<br/>
+                        Cyber + Multiverse</p>
+
+                    <p>
+                        <span style="font-weight: bold;">싸이버스 운영 방향</span><br>
+                        공부는 공짜로, 안되면 최저가로<br>
+
+                        취미로 하자. 힘들면 대충하자. 발표가 제일 많이 배운다. 없으면 직접 스터디를 만들어보자.<br>
+                        수평적으로, 스터디 참여 목적 외에 신상을 묻지 않는다. 신뢰를 지킨다. 최대한 사적 모임을 공식적으로 하지 않는다. 오픈 모임을 지향한다(물론 클로즈드도 가능은 함)<br>
+                    </p>
+                    <p>
+                        지향점 : 아카데미아 + 해커 문화<br>
+                        미래 : 스터디계의 비트코인<br>
+                        <span style="font-weight: bold;">사실은 Surviving in the real world and failing gracefully</span>
+                    </p>
+                </div>
+                
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
+                    <img src="{% static 'images/about/about_psybus.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!-- /#about -->
+
+
+<!--
+==================================================
+    Supporter Section Start
+================================================== -->
+<div id="supporters">
+<section id="clients" class="works">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="subtitle text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".3s">
+                    스터디 운영에 도움을 주시는 분들</h2>
+                    <p class="subtitle-des text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".5s">
+                    공간 지원, 공간비 지원 등 다양한 후원 감사드립니다. 후원 문의는 언제나 환영합니다!
+                    </p>
+                <div id="clients-logo" class="owl-carousel">
+                    {% for supporter in supporters %}
+                    <div>
+                        {% with supporter.logo as image_static %}
+                            <a href="{{ supporter.url }}"><img src="{% static image_static %}"
+                                 style="height: 110px;"
+                                 alt="image"/>
+                            </a>
+                        {% endwith %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+
+<!--
+==================================================
+Portfolio Section Start
+==================================================
+<section id="works" class="works">
+    <div class="container">
+        <div class="section-heading">
+            <h1 class="title wow fadeInDown" data-wow-delay=".3s">Latest Works</h1>
+            <p class="wow fadeInDown" data-wow-delay=".5s">
+                Aliquam lobortis. Maecenas vestibulum mollis diam. Pellentesque auctor neque nec urna. Nulla sit amet est. Aenean posuere <br> tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <figure class="wow fadeInLeft animated portfolio-item" data-wow-duration="500ms" data-wow-delay="0ms">
+                    <div class="img-wrapper">
+                        <img src="{% static 'images/portfolio/item-1.jpg' %}" class="img-responsive" alt="this is a title" >
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" class="fancybox" href="{% static 'images/portfolio/item-1.jpg' %}">Demo</a>
+                                <a target="_blank" href="../timer-html-master/single-portfolio.html">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                    <h4>
+                    <a href="#">
+                        Dew Drop
+                    </a>
+                    </h4>
+                    <p>
+                        Redesigne UI Concept
+                    </p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="img-wrapper">
+                        <img src="{% static 'images/portfolio/item-2.jpg' %}" class="img-responsive" alt="this is a title" >
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" class="fancybox" href="{% static 'images/portfolio/item-2.jpg' %}">Demo</a>
+                                <a target="_blank" href="../timer-html-master/single-portfolio.html">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                    <h4>
+                    <a href="#">
+                        Bottle Mockup
+                    </a>
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit.
+                    </p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="img-wrapper">
+                        <img src="images/portfolio/item-3.jpg" class="img-responsive" alt="" >
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" class="fancybox" href="images/portfolio/item-3.jpg">Demo</a>
+                                <a target="_blank" href="../timer-html-master/single-portfolio.html">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                    <h4>
+                    <a href="#">
+                        Table Design
+                    </a>
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet.
+                    </p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="600ms">
+                    <div class="img-wrapper">
+                        <img src="images/portfolio/item-4.jpg" class="img-responsive" alt="" >
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" class="fancybox" href="images/portfolio/item-4.jpg">Demo</a>
+                                <a target="_blank" href="../timer-html-master/single-portfolio.html">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                    <h4>
+                    <a href="#">
+                        Make Up elements
+                    </a>
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor.
+                    </p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                    <div class="img-wrapper">
+                        <img src="images/portfolio/item-5.jpg" class="img-responsive" alt="" >
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" class="fancybox" href="images/portfolio/item-5.jpg">Demo</a>
+                                <a target="_blank" href="../timer-html-master/single-portfolio.html">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                    <h4>
+                    <a href="#">
+                        Shoping Bag Concept
+                    </a>
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor.
+                    </p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="1200ms">
+                    <div class="img-wrapper">
+                        <img src="images/portfolio/item-6.jpg" class="img-responsive" alt="" >
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" class="fancybox" href="images/portfolio/item-6.jpg">Demo</a>
+                                <a target="_blank" href="../timer-html-master/single-portfolio.html">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                    <h4>
+                    <a href="#">
+                        Caramel Bottle
+                    </a>
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor.
+                    </p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section> <!-- #works -->
+<!--
+==================================================
+Portfolio Section Start
+==================================================
+<section id="feature">
+    <div class="container">
+        <div class="section-heading">
+            <h1 class="title wow fadeInDown" data-wow-delay=".3s">Offer From Me</h1>
+            <p class="wow fadeInDown" data-wow-delay=".5s">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed,<br> quasi dolores numquam dolor vero ex, tempora commodi repellendus quod laborum.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-flask-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Media heading</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="600ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-lightbulb-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Well documented.</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-lightbulb-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Well documented.</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1200ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-americanfootball-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Free updates</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1500ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-keypad-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Solid Support</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1800ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-barcode-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Simple Installation</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!-- /#feature -->
+
+
+            <!--
+            ==================================================
+            Call To Action Section Start
+            ==================================================
+            <section id="call-to-action">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="block">
+                                <h2 class="title wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">SO WHAT YOU THINK ?</h1>
+                                <p class="wow fadeInDown" data-wow-delay=".5s" data-wow-duration="500ms">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis,<br>possimus commodi, fugiat magnam temporibus vero magni recusandae? Dolore, maxime praesentium.</p>
+                                <a href="../timer-html-master/contact.html" class="btn btn-default btn-contact wow fadeInDown" data-wow-delay=".7s" data-wow-duration="500ms">Contact With Me</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section> -->
+
+{% endblock contents_body %}

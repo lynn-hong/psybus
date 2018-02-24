@@ -1,0 +1,150 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <!-- Basic Page Needs
+        ================================================== -->
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="icon" href="{% static 'favicon.ico' %}">
+        <title>싸이버스를 여행하는 히치하이커를 위한 안내서</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="">
+        <!-- Mobile Specific Metas
+        ================================================== -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Template CSS Files
+        ================================================== -->
+        <!-- Twitter Bootstrs CSS -->
+        <link rel="stylesheet" href="{% static 'plugins/bootstrap/bootstrap.min.css' %}">
+        <!-- Ionicons Fonts Css -->
+        <link rel="stylesheet" href="{% static 'plugins/ionicons/ionicons.min.css' %}">
+        <!-- animate css -->
+        <link rel="stylesheet" href="{% static 'plugins/animate-css/animate.css' %}">
+        <!-- Hero area slider css-->
+        <link rel="stylesheet" href="{% static 'plugins/slider/slider.css' %}">
+        <!-- owl craousel css -->
+        <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.theme.css' %}">
+        <!-- Fancybox -->
+        <link rel="stylesheet" href="{% static 'plugins/facncybox/jquery.fancybox.css' %}">
+        <!-- template main css file -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!-- timeline css file -->
+        <link rel="stylesheet" href="{% static 'css/style_timeline.css' %}">
+
+        <!-- table css file -->
+        <link rel="stylesheet" href="{% static 'css/style_table.css' %}">
+    </head>
+    <body>
+        <!-- timeline script -->
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+        <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+        <!--
+        ==================================================
+        Header Section Start
+        ================================================== -->
+        <header id="top-bar" class="navbar-fixed-top animated-header">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- responsive nav button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <!-- /responsive nav button -->
+
+                    <!-- logo -->
+                    <div class="navbar-brand">
+                        <a href="{% url 'index' %}" style="padding:0 8px; margin:0;">
+                            <img src="{% static 'images/icons/psybus_icon.png' %}"
+                                 style="height: 45px" alt="">
+                        </a>
+                    </div>
+                    <!-- /logo -->
+                </div>
+                <!-- main menu -->
+                <nav class="collapse navbar-collapse navbar-right" role="navigation">
+                    <div class="main-menu">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{% url 'index' %}#about">About</a></li>
+                            <li><a href="{% url 'index' %}#chronology">Study groups</a></li>
+                            <!-- <li><a href="#">Timetable</a></li> -->
+                            <!-- <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Family<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <ul>
+                                        <li><a href="#">People</a></li>
+                                        <li><a href="#">Groups</a></li>
+                                    </ul>
+                                </div>
+                            </li>  -->
+                            <li><a href="{% url 'index' %}#supporters">Supporters</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- /main nav -->
+            </div>
+        </header>
+
+        {% block contents_body %}
+        {% endblock contents_body %}
+
+            <!--
+            ==================================================
+            Footer Section Start
+            ================================================== -->
+            <footer id="footer">
+                <div class="container">
+                    <div class="col-md-8">
+                        <p class="copyright">Copyright:
+                            <span><script>document.write(new Date().getFullYear())</script></span>
+                            Create and Maintained by <a href="https://www.facebook.com/sulynhong" target="_blank">Lynn</a>.
+                            (version. Alpha) <br>
+                            Get More about
+                            <a href="https://www.facebook.com/thepsybus/" target="_blank">
+                                Psybus
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- Social Media -->
+                        <ul class="social">
+                            <li>
+                                <a href="https://www.facebook.com/thepsybus/" class="Facebook">
+                                    <i class="ion-social-facebook"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer> <!-- /#footer -->
+
+	<!-- Template Javascript Files
+	================================================== -->
+	<!-- jquery -->
+	<script src="{% static 'plugins/jQurey/jquery.min.js' %}"></script>
+	<!-- Form Validation -->
+    <script src="{% static 'plugins/form-validation/jquery.form.js' %}"></script>
+    <script src="{% static 'plugins/form-validation/jquery.validate.min.js' %}"></script>
+	<!-- owl carouserl js -->
+	<script src="{% static 'plugins/owl-carousel/owl.carousel.min.js' %}"></script>
+	<!-- bootstrap js -->
+	<script src="{% static 'plugins/bootstrap/bootstrap.min.js' %}"></script>
+	<!-- wow js -->
+	<script src="{% static 'plugins/wow-js/wow.min.js' %}"></script>
+	<!-- slider js -->
+	<script src="{% static 'plugins/slider/slider.js' %}"></script>
+	<!-- Fancybox -->
+	<script src="{% static 'plugins/facncybox/jquery.fancybox.js' %}"></script>
+	<!-- template main js -->
+	<script src="{% static 'js/main.js' %}"></script>
+ 	</body>
+</html>

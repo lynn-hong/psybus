@@ -1,0 +1,6 @@
+[client]
+database = KCD2018
+host = localhost
+user = root
+password = morning09
+default-character-set = utf8mb4

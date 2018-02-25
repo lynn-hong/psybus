@@ -50,7 +50,8 @@ Chronology Section Start
         <div class="row example-centered">
             <div class="col-md-12 example-title">
                 <h2 style="margin-top:80px;">스터디 그룹 연대표</h2>
-                <p>수많은 이들이 함께 만들어 온 발자취입니다</p>
+                <p style="max-width: 100%;">수많은 이들이 함께 만들어 온 발자취입니다.</p>
+                <p style="max-width: 100%";>그룹명을 누르시면 소개와 현재 진행중인 스터디 내역을 보실 수 있습니다.</p>
             </div>
             <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
                 <ul class="timeline timeline-centered">
@@ -137,13 +138,21 @@ About Section Start
 <section id="clients" class="works">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h2 class="subtitle text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".3s">
+            <div class="col-md-12 example-title">
+                <h2 class="text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".3s">
                     스터디 운영에 도움을 주시는 분들</h2>
-                    <p class="subtitle-des text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".5s">
-                    공간 지원, 공간비 지원 등 다양한 후원 감사드립니다. 후원 문의는 언제나 환영합니다!
+                    <p class="text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".6s"
+                       style="max-width:100%;">
+                    공간 지원, 공간비 지원 등 다양한 후원 감사드립니다. 로고를 좌측으로 드래그하면 모든 서포터들을 보실 수 있습니다.
                     </p>
-                <div id="clients-logo" class="owl-carousel">
+                    <p class="text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".5s"
+                       style="max-width:100%;">
+                    후원 문의는 언제나 환영합니다!
+                    </p>
+            </div>
+        </div>
+            <div class="col-md-12">
+                <div id="clients-logo" class="owl-carousel wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".9s">
                     {% for supporter in supporters %}
                     <div>
                         {% with supporter.logo as image_static %}
@@ -156,7 +165,6 @@ About Section Start
                     {% endfor %}
                 </div>
             </div>
-        </div>
     </div>
 </section>
 </div>

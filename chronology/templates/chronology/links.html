@@ -12,18 +12,40 @@
     <div class="container" style="margin-top: 100px;">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="subtitle text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".3s">
-                    Our Happy Clinets</h2>
+                <h2 class="title text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".3s">
+                    전체 스터디 그룹 링크 모아보기</h2>
                 <p class="subtitle-des text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay=".5s">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, error.</p>
-                <div id="clients-logo" class="owl-carousel">
-                    {% for link in links %}
+                    주로 페이스북에서 활동하고 있습니다. 전체 스터디 이벤트 목록을 보시려면 '싸이버스' 페이지 클릭해주세요:)</p>
+                <div class="text-center wow faceInUp animated" data-wow-duration="500ms" data-wow-delay=".7s">
+                    <h3>[ 싸이버스 내의 스터디 그룹들 ]</h3>
+                    {% for group in in_groups %}
                     <div>
-                        {% with link.logo as image_static %}
-                            <img src="{% static image_static %}"
-                                 style="height: 100%;"
-                                 alt="image"/>
-                        {% endwith %}
+                        {% if group.live %}
+                            <h2>{{ group.c_name_kor }}: <a href="{{ group.url }}" target="_blank">{{ group.url }}</a></h2>
+                        {% else %}
+                            <h2>{{ group.c_name_kor }}:
+                                <span style="font-size: 0.7em;">
+                                    <a href="{{ group.url }}">{{ group.url }}</a> ( 스터디 종료로 그룹 페이지 운영 중단 )
+                                </span>
+                            </h2>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="text-center wow faceInUp animated" data-wow-duration="500ms" data-wow-delay=".9s"
+                     style="margin: 50px 0;">
+                    <h3>[ 싸이버스와 함께하는 외부 그룹들 ]</h3>
+                    {% for group in out_groups %}
+                    <div>
+                        {% if group.live %}
+                            <h2>{{ group.c_name_kor }}: <a href="{{ group.url }}" target="_blank">{{ group.url }}</a></h2>
+                        {% else %}
+                            <h2>{{ group.c_name_kor }}:
+                                <span style="font-size: 0.7em;">
+                                    <a href="{{ group.url }}">{{ group.url }}</a> ( 스터디 종료로 그룹 페이지 운영 중단 )
+                                </span>
+                            </h2>
+                        {% endif %}
                     </div>
                     {% endfor %}
                 </div>

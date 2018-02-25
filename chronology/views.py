@@ -1,6 +1,4 @@
 from django.views.generic import TemplateView
-from django.db import models
-from django.db.models import Count, Max, Sum
 from .models import Community, Manager, Operation, Part, Study, Supporter, COMMUNITY_TYPE, DAYS_OF_WEEK, DATE_INTERVAL, LEVEL
 from django.template.defaulttags import register
 from django.shortcuts import render, get_object_or_404
@@ -34,6 +32,17 @@ def get_commu(c_type):
     return groups
 
 
+def get_links(c_type):
+    rows = Community.objects.filter(c_type=c_type).all()\
+             .order_by('c_start')    # 0=="내부"
+    for entry in rows:
+        if entry.c_end is not None:
+            entry.live = False
+        else:
+            entry.live = True
+    return rows
+
+
 class Index(TemplateView):
     template_name = 'chronology/index.html'
 
@@ -47,13 +56,17 @@ class Index(TemplateView):
         context['supporters'] = Supporter.objects.all()
         return context
 
+
 class Links(TemplateView):
     template_name = 'chronology/links.html'
+
     def get_context_data(self, **kwargs):
         context = super(Links, self).get_context_data(**kwargs)
-        # links
-        context['links'] = Supporter.objects.all()
+        # groups
+        context['in_groups'] = get_links(0)    # 0=="내부"
+        context['out_groups'] = get_links(1)    # 1=="외부"
         return context
+
 
 def get_study_info(pk):
     operations = Operation.objects.filter(c_id=pk).all()\

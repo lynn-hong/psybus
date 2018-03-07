@@ -178,6 +178,24 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class Event(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    p_id = models.ForeignKey('Part', db_column='p_id', on_delete=models.CASCADE, default=None, blank=True, null=True)
+    e_title_kor = models.CharField(max_length=255)
+    e_title_eng = models.CharField(max_length=255, blank=True, null=True)
+    start_time = models.DateTimeField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    e_desc_kor = models.TextField(blank=True, null=True)
+    e_desc_eng = models.TextField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'event'
+
+    def __str__(self):
+        return self.e_title_kor
+
+
 class Manager(models.Model):
     id = models.AutoField(primary_key=True)
     m_name_kor = models.CharField(max_length=45)

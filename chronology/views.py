@@ -1,9 +1,12 @@
+from datetime import date
+from datetime import datetime
+
+from .models import Community, Event, Manager, Operation, Part, Study, Supporter, COMMUNITY_TYPE, DAYS_OF_WEEK, DATE_INTERVAL, LEVEL
 from django.views.generic import TemplateView
-from .models import Community, Manager, Operation, Part, Study, Supporter, COMMUNITY_TYPE, DAYS_OF_WEEK, DATE_INTERVAL, LEVEL
 from django.template.defaulttags import register
 from django.shortcuts import render, get_object_or_404
-from datetime import date
 from django.db.models import Q
+
 
 @register.filter
 def get_item(dictionary, key):
@@ -30,7 +33,6 @@ def get_commu(c_type):
         else:
             groups[entry['year']].append(entry)
     return groups
-
 
 def get_links(c_type):
     rows = Community.objects.filter(c_type=c_type).all()\
@@ -68,6 +70,28 @@ class Links(TemplateView):
         return context
 
 
+def event(request):
+    event_arr = []
+    all_events = Event.objects.all()
+
+    for i in all_events:
+        event_sub_arr = {}
+        event_sub_arr['title'] = i.e_title_kor
+        event_sub_arr['desc'] = i.e_desc_kor.replace("\n", "<br />")
+        start_date = datetime.strftime(i.start_time, "%Y-%m-%d %H:%M:%S")
+        end_date = datetime.strftime(i.end_time, "%Y-%m-%d %H:%M:%S")
+        event_sub_arr['location'] = i.location
+        event_sub_arr['start'] = start_date
+        event_sub_arr['end'] = end_date
+        event_sub_arr['url'] = "https://www.facebook.com/{}".format(i.id)
+        event_arr.append(event_sub_arr)
+
+    context = {
+        "events":event_arr,
+    }
+    return render(request,'chronology/fullcalendar.html',context)
+
+
 def get_study_info(pk):
     operations = Operation.objects.filter(c_id=pk).all()\
         .values('id', 'p_id', 'c_id', 'memo',
@@ -97,8 +121,8 @@ def get_study_info(pk):
         entry['day'] = DAYS_OF_WEEK[entry['p_id__day']][1]
         entry['interval'] = DATE_INTERVAL[entry['p_id__interval']][1]
         entry['level'] = LEVEL[entry['p_id__part_level']-1][1]
-
     return operations
+
 
 def group_detail(request, pk):
     group_detail = get_object_or_404(Community, pk=pk)
@@ -109,4 +133,3 @@ def group_detail(request, pk):
                      'studies': studies,
                     }
                   )
-

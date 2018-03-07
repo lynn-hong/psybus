@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Community, Manager, Operation, Part, Study, Supporter
+from .models import Community, Event, Manager, Operation, Part, Study, Supporter
 
 
 @admin.register(Community)
@@ -7,6 +7,13 @@ class CommunityAdmin(admin.ModelAdmin):
     list_display = ['c_name_kor', 'c_name_eng', 'c_type', 'c_start', 'c_end', 'c_in_charge', 'desc_kor', 'su_id', 'url', 'logo']
     list_display_links = ['c_name_kor']
     ordering = ['-c_start']
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ['id', 'p_id', 'e_title_kor', 'e_title_eng', 'start_time', 'end_time', 'location', 'e_desc_kor', 'e_desc_eng']
+    list_display_links = ['e_title_kor']
+    ordering = ['start_time']
 
 
 @admin.register(Manager)

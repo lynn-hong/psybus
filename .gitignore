@@ -1,2 +1,3 @@
 *.pyc
 chronology/__pycache__
+chronology/migrations

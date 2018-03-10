@@ -3,15 +3,14 @@
 
 {% block contents_body %}
 
-<link href="{% static 'fullcalendar-3.8.2/fullcalendar.min.css' %}" rel='stylesheet' />
-<link href="{% static 'fullcalendar-3.8.2/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />
-<link href="{% static 'fullcalendar-3.8.2/lib/jquery-ui.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-3.9.0/fullcalendar.min.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-3.9.0/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />
 
-<script src="{% static 'fullcalendar-3.8.2/lib/jquery.min.js' %}"></script>
-<script src="{% static 'fullcalendar-3.8.2/lib/jquery-ui.min.js' %}"></script>
+<script src="{% static 'fullcalendar-3.9.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'fullcalendar-3.9.0/lib/jquery-ui.min.js' %}"></script>
 <!--<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
-<script src="{% static 'fullcalendar-3.8.2/lib/moment.min.js' %}"></script>
-<script src="{% static 'fullcalendar-3.8.2/fullcalendar.min.js' %}"></script>
+<script src="{% static 'fullcalendar-3.9.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'fullcalendar-3.9.0/fullcalendar.min.js' %}"></script>
 
 <script>
     window.mobilecheck = function() {
@@ -32,7 +31,7 @@
             maxTime: "24:00:00",
             editable: true,
             selectable: true,
-            disableResizing: true,
+            disableResizing: false,
             eventLimit: true, // allow "more" link when too many events
             events: [
                 {% for e in events %}

@@ -1,3 +1,4 @@
 *.pyc
+*.out
 chronology/__pycache__
 chronology/migrations

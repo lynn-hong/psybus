@@ -29,6 +29,8 @@
         <!-- owl craousel css -->
         <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.carousel.css' %}">
         <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.theme.css' %}">
+        <!-- font-awesome css -->
+        <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
         <!-- Fancybox -->
         <link rel="stylesheet" href="{% static 'plugins/facncybox/jquery.fancybox.css' %}">
         <!-- template main css file -->
@@ -73,9 +75,11 @@
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <div class="main-menu">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{% url 'index' %}#about">About</a></li>
-                            <li><a href="{% url 'index' %}#chronology">Study groups</a></li>
-                            <li><a href="{% url 'calendar' %}">Study calendar</a></li>
+                            <li class="active"><a href="{% url 'index' %}#about">About</a></li>
+                            <li><a href="{% url 'index' %}#chronology">
+                                <i class="fa fa-users" aria-hidden="true"></i> Study groups</a></li>
+                            <li><a href="{% url 'calendar' %}">
+                                <i class="fa fa-calendar" aria-hidden="true"></i> Calendar</a></li>
                             <!-- <li><a href="#">Timetable</a></li> -->
                             <!-- <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Family<span class="caret"></span></a>
@@ -86,8 +90,10 @@
                                     </ul>
                                 </div>
                             </li>  -->
-                            <li><a href="{% url 'index' %}#supporters">Supporters</a></li>
-                            <li><a href="{% url 'links' %}">Links</a></li>
+                            <li><a href="{% url 'index' %}#supporters">
+                                <i class="fa fa-diamond" aria-hidden="true"></i> Supporters</a></li>
+                            <li><a href="{% url 'links' %}">
+                                <i class="fa fa-link" aria-hidden="true"></i> Links</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -108,7 +114,7 @@
                         <p class="copyright">Copyright:
                             <span><script>document.write(new Date().getFullYear())</script></span>
                             Create and Maintained by <a href="https://www.facebook.com/sulynhong" target="_blank">Lynn</a>.
-                            (version. Alpha) <br>
+                            (version. Beta) <br>
                             Get More about
                             <a href="https://www.facebook.com/thepsybus/" target="_blank">
                                 Psybus

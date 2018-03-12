@@ -13,6 +13,7 @@ class CommunityAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ['id', 'p_id', 'e_title_kor', 'e_title_eng', 'start_time', 'end_time', 'location', 'e_desc_kor', 'e_desc_eng']
     list_display_links = ['e_title_kor']
+    search_fields = ['e_title_kor', 'location', 'e_desc_kor']
     ordering = ['start_time']
 
 

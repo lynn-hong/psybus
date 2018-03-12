@@ -4,6 +4,8 @@ __date__ = '2/27/2018'
 
 import os
 import time
+from datetime import datetime, timedelta
+import requests
 import logging
 from pprint import pprint
 
@@ -24,7 +26,7 @@ class Facebook_crawler():
         self.graph = facebook.GraphAPI(access_token="338938349924993|BlDmbQBsIcfZzse96Y19v6JcNx0",
                                        version="2.11")
         self.group_id_list = ['thepsybus', 'biospintalk']
-        self.event_sql = "INSERT IGNORE INTO event(id, e_title_kor, start_time, end_time, location, e_desc_kor) " \
+        self.event_sql = "REPLACE INTO event(id, e_title_kor, start_time, end_time, location, e_desc_kor) " \
                          "VALUE(%s, %s, %s, %s, %s, %s);"
 
     def connect_db(self, autocommit=True):
@@ -53,20 +55,36 @@ class Facebook_crawler():
     def get_fb_event(self):
         for group_id in self.group_id_list:
             # Get the message from a post.
-            post = self.graph.get_object(id=group_id, fields='events',
-                                         after="QVFIUkM2cUZArbjh0cU1tMnFuVS1GUlY5WmpBRENmY2NYejUtN2lHdVZATbjRvVFhRcWpfOXM0LTJHVnlEUFo3Vkw2WnUyaDlSaEtkb1Rhd1J1YzlzZAVJIUXBR")
-            pprint(post['events']['paging'])
-            for data in post['events']['data']:
-                id = "{}_{}".format(group_id, data['id'])
-                e_title_kor = data['name']
-                start_time = parse(data['start_time']).strftime('%Y-%m-%d %H:%M:%S')
-                end_time = parse(data['end_time']).strftime('%Y-%m-%d %H:%M:%S')
-                location = data['place']['name']
-                e_desc_kor = data['description']
-                val_tuple = (id, e_title_kor, start_time, end_time, location, e_desc_kor)
-                self.insert_mysql(self.event_sql, val_tuple)
-            logging.info("Inserted")
-            #break
+            post = self.graph.get_object(id=group_id, fields='events')['events']
+            page = 0
+            while True:
+                page += 1
+                if page % 10 == 0:
+                    logging.info(page)
+                for data in post['data']:
+                    id = "{}_{}".format(group_id, data['id'])
+                    e_title_kor = data['name']
+                    start_time = parse(data['start_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    try:
+                        end_time = parse(data['end_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    except KeyError:
+                        end_time = datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S') + timedelta(hours=2)
+                    try:
+                        location = data['place']['name']
+                    except KeyError:
+                        location = "본문 참조"
+                    try:
+                        e_desc_kor = data['description']
+                    except KeyError:
+                        e_desc_kor = "(내용 없음)"
+                    val_tuple = (id, e_title_kor, start_time, end_time, location, e_desc_kor)
+                    self.insert_mysql(self.event_sql, val_tuple)
+                    logging.info("Inserted")
+                try:
+                    post = requests.get(post['paging']['next']).json()
+                except KeyError:
+                    break
+
 
 if __name__ == "__main__":
     mysql_file = "/home/lynn/workspace/django/kcd2018/kcd2018/mysql.cnf"

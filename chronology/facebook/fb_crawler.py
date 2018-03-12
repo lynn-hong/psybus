@@ -23,8 +23,8 @@ class Facebook_crawler():
         self.connect_db()
         self.graph = facebook.GraphAPI(access_token="338938349924993|BlDmbQBsIcfZzse96Y19v6JcNx0",
                                        version="2.11")
-        self.group_id_list = ['thepsybus']
-        self.event_sql = "INSERT INTO event(id, e_title_kor, start_time, end_time, location, e_desc_kor) " \
+        self.group_id_list = ['thepsybus', 'biospintalk']
+        self.event_sql = "INSERT IGNORE INTO event(id, e_title_kor, start_time, end_time, location, e_desc_kor) " \
                          "VALUE(%s, %s, %s, %s, %s, %s);"
 
     def connect_db(self, autocommit=True):

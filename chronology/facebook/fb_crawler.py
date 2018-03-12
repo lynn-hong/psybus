@@ -28,6 +28,7 @@ class Facebook_crawler():
         self.group_id_list = ['thepsybus', 'biospintalk']
         self.event_sql = "REPLACE INTO event(id, e_title_kor, start_time, end_time, location, e_desc_kor) " \
                          "VALUE(%s, %s, %s, %s, %s, %s);"
+        self.now = datetime.now()
 
     def connect_db(self, autocommit=True):
         logging.info("start reading config file")
@@ -38,13 +39,13 @@ class Facebook_crawler():
         user = config.get('client', 'user')
         password = config.get('client', 'password')
         encoding = config.get('client', 'default-character-set')
-        logging.info("try to connect to project db")
+        print("Try to connect to project db")
         self.con = pymysql.connect(host=host, db=database,
                                    user=user, passwd=password, charset=encoding)
         self.cur = self.con.cursor()
         if autocommit is True:
             self.con.autocommit(True)       # turn-on autocummit, be careful!
-        logging.info("Connected")
+        print("Connected")
 
     def insert_mysql(self, sql, val_tuple):
         try:
@@ -65,6 +66,9 @@ class Facebook_crawler():
                     id = "{}_{}".format(group_id, data['id'])
                     e_title_kor = data['name']
                     start_time = parse(data['start_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    if self.now > datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S'):
+                        print("Stop fetch events.")
+                        break
                     try:
                         end_time = parse(data['end_time']).strftime('%Y-%m-%d %H:%M:%S')
                     except KeyError:
@@ -79,7 +83,7 @@ class Facebook_crawler():
                         e_desc_kor = "(내용 없음)"
                     val_tuple = (id, e_title_kor, start_time, end_time, location, e_desc_kor)
                     self.insert_mysql(self.event_sql, val_tuple)
-                    logging.info("Inserted")
+                    print("Inserted")
                 try:
                     post = requests.get(post['paging']['next']).json()
                 except KeyError:

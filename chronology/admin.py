@@ -14,7 +14,7 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ['id', 'p_id', 'e_title_kor', 'e_title_eng', 'start_time', 'end_time', 'location', 'e_desc_kor', 'e_desc_eng']
     list_display_links = ['e_title_kor']
     search_fields = ['e_title_kor', 'location', 'e_desc_kor']
-    ordering = ['start_time']
+    ordering = ['-start_time']
 
 
 @admin.register(Manager)
@@ -35,6 +35,7 @@ class PartAdmin(admin.ModelAdmin):
     list_display = ['part_info', 'p_in_charges', 'interval', 'day', 'start', 'end', 'start_time', 'end_time', 'location',
                     'part_level', 'prerequisite', 'textbook']
     list_display_links = ['part_info']
+    search_fields = ['s_id__s_name_kor', 'prerequisite', 'textbook']
     ordering = ['day', 'start_time', 'interval']
 
     def part_info(self, obj):

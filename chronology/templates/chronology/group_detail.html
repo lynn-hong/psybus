@@ -32,7 +32,7 @@ Group detail Section Start
                     <h2>관련 스터디 진행 내역(joint 포함)</h2>
                     <ul id="study_list">
                         {% for study in studies %}
-                        <li><h4>{{ study.p_id__s_id__s_name_kor }}: {{ study.p_id__s_id__desc_kor }}</h4></li>
+                        <li><h4>{{ study.p_id__s_id__s_name_kor }}({{ study.p_id__part_num }}): {{ study.p_id__s_id__desc_kor }}</h4></li>
                         {% endfor %}
                     </ul>
                         <table class="rwd-table" style="margin-top: 50px;">

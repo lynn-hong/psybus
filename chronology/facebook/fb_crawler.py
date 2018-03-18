@@ -58,6 +58,7 @@ class Facebook_crawler():
             # Get the message from a post.
             post = self.graph.get_object(id=group_id, fields='events')['events']
             page = 0
+            stop = False
             while True:
                 page += 1
                 if page % 10 == 0:
@@ -68,6 +69,7 @@ class Facebook_crawler():
                     start_time = parse(data['start_time']).strftime('%Y-%m-%d %H:%M:%S')
                     if self.now > datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S'):
                         print("Stop fetch events.")
+                        stop = True
                         break
                     try:
                         end_time = parse(data['end_time']).strftime('%Y-%m-%d %H:%M:%S')
@@ -84,6 +86,8 @@ class Facebook_crawler():
                     val_tuple = (id, e_title_kor, start_time, end_time, location, e_desc_kor)
                     self.insert_mysql(self.event_sql, val_tuple)
                     print("Inserted")
+                if stop:
+                    break
                 try:
                     post = requests.get(post['paging']['next']).json()
                 except KeyError:

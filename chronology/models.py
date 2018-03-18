@@ -215,11 +215,12 @@ class Manager(models.Model):
 
 class Operation(models.Model):
     id = models.AutoField(primary_key=True)
-    p_id = models.ForeignKey('Part', db_column='p_id', on_delete=models.CASCADE)
-    c_id = models.ForeignKey('Community', db_column='c_id', on_delete=models.CASCADE)
+    p_id = models.ForeignKey('Part', db_column='p_id')
+    c_id = models.ForeignKey('Community', db_column='c_id')
     memo = models.TextField(blank=True, null=True)
 
     class Meta:
+        unique_together = (('p_id', 'c_id'),)
         db_table = 'operation'
 
 

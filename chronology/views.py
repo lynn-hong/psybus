@@ -94,7 +94,7 @@ def event(request):
 
 def get_study_info(pk):
     operations = Operation.objects.filter(c_id=pk).all()\
-        .values('id', 'p_id', 'c_id', 'memo',
+        .values('p_id', 'c_id', 'memo',
                 'p_id__part_num', 'p_id__start', 'p_id__end', 'p_id__interval', 'p_id__day', 'p_id__p_in_charge', 'p_id__p_in_charge_sub',
                 'p_id__start_time', 'p_id__end_time', 'p_id__location', 'p_id__prerequisite', 'p_id__textbook', 'p_id__part_level',
                 'p_id__s_id', 'p_id__s_id__s_name_kor', 'p_id__s_id__s_name_eng', 'p_id__s_id__desc_kor', 'p_id__s_id__desc_eng',

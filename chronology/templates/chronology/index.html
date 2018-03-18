@@ -156,7 +156,7 @@ About Section Start
                     {% for supporter in supporters %}
                     <div>
                         {% with supporter.logo as image_static %}
-                            <a href="{{ supporter.url }}"><img src="{% static image_static %}"
+                            <a href="{{ supporter.url }}" target="_blank"><img src="{% static image_static %}"
                                  style="height: 110px;"
                                  alt="image"/>
                             </a>

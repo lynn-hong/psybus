@@ -19,7 +19,7 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(Manager)
 class ManagerAdmin(admin.ModelAdmin):
-    list_display = ['m_name_kor', 'm_name_eng', 'affiliation_kor', 'affiliation_eng', 'desc_kor', 'facebook']
+    list_display = ['m_name_kor', 'm_name_eng', 'affiliation_kor', 'affiliation_eng', 'desc_kor', 'facebook', 'profile_pic']
     list_display_links = ['m_name_kor']
     ordering = ['m_name_kor']
 

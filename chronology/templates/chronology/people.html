@@ -1,0 +1,39 @@
+{% extends "chronology/base.html" %}
+
+{% load staticfiles %}
+
+{% block contents_body %}
+
+<!--
+==================================================
+    Team Section Start
+================================================== -->
+<section id="team">
+    <div class="container">
+        <div class="row">
+            <h2 class="subtitle text-center">Meet The Team</h2>
+            {% for person in people %}
+            <div class="col-md-3">
+                <div class="team-member wow fadeInLeft" data-wow-duration="500ms" data-wow-delay=".3s">
+                    <div class="team-img">
+                        {% if not person.profile_pic %}
+                        <img src="https://vignette.wikia.nocookie.net/simpsons/images/6/60/No_Image_Available.png/revision/latest?cb=20170219125728"
+                             class="team-pic" alt="" style="border-radius: 50%;">
+                        {% else %}
+                        <img src="{{ person.profile_pic }}" class="team-pic" alt="" style="border-radius: 50%;">
+                        {% endif %}
+                    </div>
+                    <h3 class="team_name">{{ person.m_name_kor }}({{ person.m_name_eng }})</h3>
+                    <p class="team_designation">{{ person.affiliation_kor }}</p>
+                    <p class="team_text">{{ person.desc_kor }}</p>
+                    <p class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id={{ person.facebook }}" class="facebook" target="_blank"><i class="ion-social-facebook-outline"></i></a>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock contents_body %}

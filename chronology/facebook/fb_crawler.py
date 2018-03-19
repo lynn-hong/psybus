@@ -2,7 +2,7 @@ __author__ = 'Lynn'
 __email__ = 'lynnn.hong@gmail.com'
 __date__ = '2/27/2018'
 
-import os
+import os, sys
 import time
 from datetime import datetime, timedelta
 import requests
@@ -23,11 +23,14 @@ class Facebook_crawler():
         time.tzset()
         self.client_file = client_file
         self.connect_db()
-        self.graph = facebook.GraphAPI(access_token="338938349924993|BlDmbQBsIcfZzse96Y19v6JcNx0",
+        self.access_token = "338938349924993|BlDmbQBsIcfZzse96Y19v6JcNx0"
+        self.graph = facebook.GraphAPI(access_token=self.access_token,
                                        version="2.11")
         self.group_id_list = ['thepsybus', 'biospintalk']
         self.event_sql = "REPLACE INTO event(id, e_title_kor, start_time, end_time, location, e_desc_kor) " \
                          "VALUE(%s, %s, %s, %s, %s, %s);"
+        self.profile_pic_sql = "INSERT INTO manager(profile_pic) " \
+                         "VALUE(%s);"
         self.now = datetime.now()
 
     def connect_db(self, autocommit=True):
@@ -93,9 +96,31 @@ class Facebook_crawler():
                 except KeyError:
                     break
 
+    def get_fb_profile_pic(self):
+        fetch_sql = "SELECT id, facebook FROM manager;"
+        update_sql = "UPDATE manager SET profile_pic='{}' WHERE id={};"
+        self.cur.execute(fetch_sql)
+        id_list = self.cur.fetchall()
+        for usr_id in id_list:
+            if usr_id[1] != "":
+                #picture = self.graph.get_object(id=usr_id[1], fields='picture', type='large')
+                picture = requests.get("https://graph.facebook.com/{}/picture?access_token={}&redirect=false&type=large".
+                                       format(usr_id[1], self.access_token)).json()
+                self.cur.execute(update_sql.format(picture['data']['url'], usr_id[0]))
+                print("inserted")
+
 
 if __name__ == "__main__":
-    mysql_file = "/home/lynn/workspace/django/kcd2018/kcd2018/mysql.cnf"
-    fc = Facebook_crawler(mysql_file)
-    fc.connect_db()
-    fc.get_fb_event()
+    if len(sys.argv) > 1:
+        command_type = sys.argv[1]
+        mysql_file = "/home/lynn/workspace/django/kcd2018/kcd2018/mysql.cnf"
+        fc = Facebook_crawler(mysql_file)
+        fc.connect_db()
+        if command_type == "event":
+            fc.get_fb_event()
+        elif command_type == "profile":
+            fc.get_fb_profile_pic()
+        else:
+            print("You have to select type 'event' or 'profile'")
+    else:
+        print("You have to select type 'event' or 'profile'")

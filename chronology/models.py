@@ -205,6 +205,7 @@ class Manager(models.Model):
     desc_kor = models.TextField()
     desc_eng = models.TextField(blank=True, null=True)
     facebook = models.CharField(max_length=255, blank=True, null=True)
+    profile_pic = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         db_table = 'manager'

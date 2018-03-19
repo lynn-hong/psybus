@@ -70,6 +70,15 @@ class Links(TemplateView):
         return context
 
 
+class People(TemplateView):
+    template_name = 'chronology/people.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(People, self).get_context_data(**kwargs)
+        # people(manager)
+        context['people'] = Manager.objects.all().order_by('m_name_kor')
+        return context
+
 def event(request):
     event_arr = []
     all_events = Event.objects.all()
